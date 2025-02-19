@@ -1,10 +1,21 @@
-export type LocalePair = {
+export type Messages = {
   inputMenu: {
     noMatch: string
     noData: string
     create: string
   }
+  calendar: {
+    prevYear: string
+    nextYear: string
+    prevMonth: string
+    nextMonth: string
+  }
+  inputNumber: {
+    increment: string
+    decrement: string
+  }
   commandPalette: {
+    placeholder: string
     noMatch: string
     noData: string
     close: string
@@ -13,6 +24,7 @@ export type LocalePair = {
     noMatch: string
     noData: string
     create: string
+    search: string
   }
   toast: {
     close: string
@@ -36,8 +48,11 @@ export type LocalePair = {
   }
 }
 
+export type Direction = 'ltr' | 'rtl'
+
 export type Locale = {
   name: string
   code: string
-  ui: LocalePair
+  dir: Direction
+  messages: Messages
 }

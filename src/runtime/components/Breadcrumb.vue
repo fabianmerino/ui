@@ -1,15 +1,15 @@
 <script lang="ts">
-import { tv } from 'tailwind-variants'
 import type { AppConfig } from '@nuxt/schema'
 import _appConfig from '#build/app.config'
 import theme from '#build/ui/breadcrumb'
 import { extendDevtoolsMeta } from '../composables/extendDevtoolsMeta'
+import { tv } from '../utils/tv'
 import type { AvatarProps, LinkProps } from '../types'
 import type { DynamicSlots, PartialString } from '../types/utils'
 
-const appConfig = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
+const appConfigBreadcrumb = _appConfig as AppConfig & { ui: { breadcrumb: Partial<typeof theme> } }
 
-const breadcrumb = tv({ extend: tv(theme), ...(appConfig.ui?.breadcrumb || {}) })
+const breadcrumb = tv({ extend: tv(theme), ...(appConfigBreadcrumb.ui?.breadcrumb || {}) })
 
 export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
   label?: string
@@ -21,7 +21,7 @@ export interface BreadcrumbItem extends Omit<LinkProps, 'raw' | 'custom'> {
 export interface BreadcrumbProps<T> {
   /**
    * The element or component this component should render as.
-   * @defaultValue 'div'
+   * @defaultValue 'nav'
    */
   as?: any
   items?: T[]
@@ -76,8 +76,10 @@ extendDevtoolsMeta({
 </script>
 
 <script setup lang="ts" generic="T extends BreadcrumbItem">
-import { Primitive } from 'radix-vue'
+import { computed } from 'vue'
+import { Primitive } from 'reka-ui'
 import { useAppConfig } from '#imports'
+import { useLocale } from '../composables/useLocale'
 import { get } from '../utils'
 import { pickLinkProps } from '../utils/link'
 import UIcon from './Icon.vue'
@@ -86,11 +88,14 @@ import ULinkBase from './LinkBase.vue'
 import ULink from './Link.vue'
 
 const props = withDefaults(defineProps<BreadcrumbProps<T>>(), {
+  as: 'nav',
   labelKey: 'label'
 })
 const slots = defineSlots<BreadcrumbSlots<T>>()
-
+const { dir } = useLocale()
 const appConfig = useAppConfig()
+
+const separatorIcon = computed(() => props.separatorIcon || (dir.value === 'rtl' ? appConfig.ui.icons.chevronLeft : appConfig.ui.icons.chevronRight))
 
 // eslint-disable-next-line vue/no-dupe-keys
 const ui = breadcrumb()
@@ -121,9 +126,9 @@ const ui = breadcrumb()
           </ULink>
         </li>
 
-        <li v-if="index < items!.length - 1" role="presentation" :class="ui.separator({ class: props.ui?.separator })">
+        <li v-if="index < items!.length - 1" role="presentation" aria-hidden="true" :class="ui.separator({ class: props.ui?.separator })">
           <slot name="separator">
-            <UIcon :name="separatorIcon || appConfig.ui.icons.chevronRight" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
+            <UIcon :name="separatorIcon" :class="ui.separatorIcon({ class: props.ui?.separatorIcon })" />
           </slot>
         </li>
       </template>
