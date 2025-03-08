@@ -30,16 +30,6 @@ Read more on [ui.nuxt.com](https://ui.nuxt.com)
 npx nuxi@latest module add ui
 ```
 
-If you want latest updates, please use `@nuxt/ui-edge` in your `package.json`:
-
-```json
-{
-  "devDependencies": {
-    "@nuxt/ui": "npm:@nuxt/ui-edge@latest"
-  }
-}
-```
-
 ## Documentation
 
 Visit https://ui.nuxt.com to explore the documentation.
