@@ -37,16 +37,6 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
 
-      - name: Filter changes
-        uses: dorny/paths-filter@v3
-        id: changes
-        with:
-          filters: |
-            src:
-              - 'src/**'
-              - 'package.json'
-              - 'pnpm-lock.yaml'
-
       - name: Install dependencies
         run: pnpm install
 
@@ -65,8 +55,5 @@ jobs:
       - name: Test
         run: pnpm run test run
 
-      - name: Release Edge
-        if: github.event_name == 'push' && steps.changes.outputs.src == 'true'
-        run: ./scripts/release-edge.sh
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+      - name: Publish
+        run: pnpx pkg-pr-new publish --compact --no-template --pnpm
