@@ -23,9 +23,10 @@
       </template>
 
       <template #links>
-        <UButton label="Get Started" trailing-icon="i-heroicons-arrow-right-20-solid" size="lg" to="/getting-started/installation" />
+        <UButton label="Get started" size="lg" to="/getting-started/installation" />
+        <UButton label="Explore components" trailing-icon="i-heroicons-arrow-right-20-solid" color="gray" size="lg" to="/components/button" />
 
-        <UInput
+        <!-- <UInput
           v-model="source"
           color="gray"
           readonly
@@ -47,7 +48,7 @@
               @click="copy(source)"
             />
           </template>
-        </UInput>
+        </UInput> -->
       </template>
 
       <ClientOnly>
@@ -325,7 +326,7 @@
                 </template>
 
                 <template #links>
-                  <UButton label="Get Started" icon="i-heroicons-rocket-launch" size="md" />
+                  <UButton label="Get started" icon="i-heroicons-rocket-launch" size="md" />
 
                   <UInput
                     model-value="npm i @nuxt/ui"
@@ -439,7 +440,7 @@ useSeoMeta({
   twitterImage: 'https://ui2.nuxt.com/social-card.png'
 })
 
-const source = ref('npx nuxi@latest module add ui')
+// const source = ref('npx nuxi@latest module add ui')
 const sectionRef = ref()
 const demoRef = ref(null)
 const start = ref(0)
@@ -449,7 +450,7 @@ const { height } = useElementSize(demoRef)
 const { top } = useElementBounding(sectionRef)
 const { y } = useWindowScroll()
 const config = useRuntimeConfig().public
-const { copy, copied } = useClipboard({ source })
+// const { copy, copied } = useClipboard({ source })
 const breakpoints = useBreakpoints(breakpointsTailwind)
 
 const lgAndLarger = breakpoints.greaterOrEqual('lg')
