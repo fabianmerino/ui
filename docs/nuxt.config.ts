@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   },
   $production: {
     site: {
-      url: 'https://ui3.nuxt.dev'
+      url: 'https://ui.nuxt.com'
     }
   },
 
@@ -55,6 +55,7 @@ export default defineNuxtConfig({
       }]
     },
     rootAttrs: {
+      // @ts-expect-error - vaul-drawer-wrapper is not typed
       'vaul-drawer-wrapper': '',
       'class': 'bg-(--ui-bg)'
     }
@@ -85,8 +86,8 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/': { redirect: '/getting-started', prerender: false },
     '/getting-started/installation': { redirect: '/getting-started/installation/nuxt', prerender: false },
+    '/getting-started/installation/pro': { redirect: '/getting-started/installation/pro/nuxt', prerender: false },
     '/getting-started/icons': { redirect: '/getting-started/icons/nuxt', prerender: false },
     '/getting-started/color-mode': { redirect: '/getting-started/color-mode/nuxt', prerender: false },
     '/getting-started/i18n': { redirect: '/getting-started/i18n/nuxt', prerender: false },
@@ -104,9 +105,10 @@ export default defineNuxtConfig({
       routes: [
         '/getting-started',
         '/api/countries.json',
-        '/api/locales.json'
+        '/api/locales.json',
         // '/api/releases.json',
         // '/api/pulls.json'
+        '/404.html'
       ],
       crawlLinks: true,
       autoSubfolderIndex: false
@@ -127,7 +129,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       yaml()
-    ]
+    ],
+    server: {
+      fs: {
+        allow: process.env.NUXT_UI_PRO_PATH ? [resolve(process.env.NUXT_UI_PRO_PATH)] : undefined
+      }
+    }
   },
 
   componentMeta: {
@@ -169,12 +176,12 @@ export default defineNuxtConfig({
   },
 
   llms: {
-    domain: 'https://ui3.nuxt.dev',
-    title: 'Nuxt UI v3',
+    domain: 'https://ui.nuxt.com',
+    title: 'Nuxt UI',
     description: 'A comprehensive, Nuxt-integrated UI library providing a rich set of fully-styled, accessible and highly customizable components for building modern web applications.',
     full: {
-      title: 'Nuxt UI v3 Full Documentation',
-      description: 'This is the full documentation for Nuxt UI v3. It includes all the Markdown files written with the MDC syntax.'
+      title: 'Nuxt UI Full Documentation',
+      description: 'This is the full documentation for Nuxt UI. It includes all the Markdown files written with the MDC syntax.'
     },
     sections: [
       {

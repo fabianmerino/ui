@@ -122,6 +122,10 @@ type AppConfigUI = {
 
 declare module '@nuxt/schema' {
   interface AppConfigInput {
+    /**
+     * Nuxt UI theme configuration
+     * @see https://ui.nuxt.com/getting-started/theme#customize-theme
+     */
     ui?: AppConfigUI
   }
 }

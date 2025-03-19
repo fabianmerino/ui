@@ -24,11 +24,10 @@ useSeoMeta({
       }"
     >
       <template #title>
-        <MDC :value="page.pricing.title" unwrap="p" />
+        <MDC :value="page.pricing.title" unwrap="p" cache-key="pro-pricing-title" />
       </template>
-      <template #top>
-        <StarsBg />
-      </template>
+
+      <StarsBg />
       <div aria-hidden="true" class="hidden lg:block absolute z-[-1] border-x border-(--ui-border) inset-0 mx-4 sm:mx-6 lg:mx-8" />
       <div class="flex flex-col bg-(--ui-bg) gap-8 lg:gap-0">
         <UPricingPlan
@@ -43,6 +42,7 @@ useSeoMeta({
             :title="plan.title"
             :description="plan.description"
             :price="plan.price"
+            :discount="plan.discount"
             :billing-period="plan.billing_period"
             :billing-cycle="plan.billing_cycle"
             :variant="plan.highlight ? 'soft' : 'outline'"
@@ -54,12 +54,14 @@ useSeoMeta({
         <UPricingPlan
           v-bind="page.pricing.figma"
           variant="naked"
+          :billing-period="page.pricing.figma.billing_period"
+          :billing-cycle="page.pricing.figma.billing_cycle"
           class="lg:rounded-none border lg:border-y-0 border-(--ui-border)"
         >
           <template #features>
             <li v-for="(feature, index) in page.pricing.figma.features" :key="index" class="flex items-center gap-2 min-w-0">
               <UIcon name="i-lucide-circle-check" class="size-5 text-(--ui-primary) shrink-0" />
-              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" />
+              <MDC :value="feature" unwrap="p" class="text-sm truncate text-(--ui-text-toned)" :cache-key="`pro-pricing-figma-feature-${index}`" />
             </li>
           </template>
         </UPricingPlan>
@@ -111,8 +113,8 @@ useSeoMeta({
         :items="(page.faq.items as any[])"
         class="max-w-4xl mx-auto"
       >
-        <template #body="{ item }">
-          <MDC :value="item.content" unwrap="p" />
+        <template #body="{ item, index }">
+          <MDC :value="item.content" unwrap="p" :cache-key="`pro-pricing-faq-${index}-content`" />
         </template>
       </UPageAccordion>
     </UPageSection>
