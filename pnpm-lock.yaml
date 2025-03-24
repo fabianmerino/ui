@@ -304,6 +304,9 @@ importers:
 
   playground:
     dependencies:
+      '@compodium/nuxt':
+        specifier: 0.1.0-beta.7
+        version: 0.1.0-beta.7(magicast@0.3.5)(typescript@5.6.3)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.6.3))
       '@iconify-json/lucide':
         specifier: ^1.2.32
         version: 1.2.32
@@ -548,6 +551,29 @@ packages:
 
   '@cloudflare/workers-types@4.20250321.0':
     resolution: {integrity: sha512-jPwtZJC7tVFOwFazuwq96be8haTnY9qik8hJ+oLFi50d9LTWPPrnrNHC4OxZmJTEcPIAy0y1WFZHe8C/b7xFXQ==}
+
+  '@compodium/core@0.1.0-beta.7':
+    resolution: {integrity: sha512-QFR+nlc7x0oP4j10eSOwH8TM1/mEIGseo7qrtPEVq35X0F7bAPXSQAZnyNOEZtcAc9PETkZ+j8l508K90orWdw==}
+    peerDependencies:
+      vite: '>=3.2.11'
+      vue: '>=3.5.13'
+    peerDependenciesMeta:
+      vite:
+        optional: true
+
+  '@compodium/examples@0.1.0-beta.7':
+    resolution: {integrity: sha512-EbyD4fW3ZCel9sYlB/ecZ9tWYyjduBRRNhU4NeL+hgyYi7gInrPMkx8PVyYrp2A6ckjJCmDZtkVCRrBQ/f8u4Q==}
+
+  '@compodium/meta@0.1.0-beta.7':
+    resolution: {integrity: sha512-i1xm4wQ1YwPgLiiM22In+y94oxJgd5/CgkXFJK9rnq7jO+uGi7rbbyA/fr+7BXnpIgE9eqPESewI7YYyzuQ1Pw==}
+    peerDependencies:
+      typescript: 5.6.3
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
+  '@compodium/nuxt@0.1.0-beta.7':
+    resolution: {integrity: sha512-TVACdtzWRwfXJzG+T8+Fal8ecdeo0AIc9jcslslMSjKDqTRK6mgCMnfDr8dM5IX1VD2U46euKR/ZpnTqg2/a2w==}
 
   '@conventional-changelog/git-client@1.0.1':
     resolution: {integrity: sha512-PJEqBwAleffCMETaVm/fUgHldzBE35JFk3/9LL6NUA5EXa3qednu+UT6M7E5iBu3zIQZCULYIiZ90fBYHt6xUw==}
@@ -4925,6 +4951,10 @@ packages:
     resolution: {integrity: sha512-ub9iytsEbT7Yw/Pd29mSo/cNQpaEu67zR1VVcXDiYjSFwzeBxNdTd0FMnSslLQXiRj8uGPzwsaoefrMD5XAmdw==}
     engines: {node: '>=16.14.0'}
 
+  magic-string-ast@0.8.0:
+    resolution: {integrity: sha512-e9eH6YOYl2OuDd3fNt2ciFhj/l2vxJmGeWLLcY+0NcW6k0Xitq7XIxN2++QVVhswXeJLy95SjF8oVKRyJC95GQ==}
+    engines: {node: '>=20.18.0'}
+
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
 
@@ -6686,6 +6716,10 @@ packages:
   universal-user-agent@7.0.2:
     resolution: {integrity: sha512-0JCqzSKnStlRRQfCdowvqy3cy0Dvtlb8xecj/H8JFZuCze4rwjPZQOgvFvn0Ws/usCHQFGpyr+pB9adaGwXn4Q==}
 
+  unplugin-ast@0.14.4:
+    resolution: {integrity: sha512-9EWJqy9PblRP/7/6Fl2YSAXEuzkJmTMSmoWEd+NBlqHETDaYgd2hGrRNC2gHmz4Ec7lUVxeWKtowYmYuC+lJng==}
+    engines: {node: '>=18.12.0'}
+
   unplugin-auto-import@19.1.1:
     resolution: {integrity: sha512-sCGZZrSR1Bc8RfN8Q0RUDxXtC20rdAt7UB4lDyq8MNtKVHiXXh+5af6Nz4JRp9Q+7HjnbgQfQox0TkEymjdUAQ==}
     engines: {node: '>=14'}
@@ -7513,6 +7547,55 @@ snapshots:
     optional: true
 
   '@cloudflare/workers-types@4.20250321.0': {}
+
+  '@compodium/core@0.1.0-beta.7(typescript@5.6.3)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@compodium/examples': 0.1.0-beta.7
+      '@compodium/meta': 0.1.0-beta.7(typescript@5.6.3)
+      '@vueuse/core': 13.0.0(vue@3.5.13(typescript@5.6.3))
+      chokidar: 3.6.0
+      hookable: 5.5.3
+      pathe: 2.0.3
+      scule: 1.3.0
+      sirv: 3.0.1
+      tinyglobby: 0.2.12
+      ufo: 1.5.4
+      unplugin: 2.2.2
+      unplugin-ast: 0.14.4
+      vue: 3.5.13(typescript@5.6.3)
+      zod: 3.24.2
+    optionalDependencies:
+      vite: 6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0)
+    transitivePeerDependencies:
+      - typescript
+
+  '@compodium/examples@0.1.0-beta.7':
+    dependencies:
+      pathe: 2.0.3
+      scule: 1.3.0
+
+  '@compodium/meta@0.1.0-beta.7(typescript@5.6.3)':
+    dependencies:
+      '@volar/typescript': 2.4.12
+      '@vue/language-core': 2.2.8(typescript@5.6.3)
+      pathe: 2.0.3
+      vue-component-meta: 2.2.8(typescript@5.6.3)
+      vue-component-type-helpers: 2.2.8
+    optionalDependencies:
+      typescript: 5.6.3
+
+  '@compodium/nuxt@0.1.0-beta.7(magicast@0.3.5)(typescript@5.6.3)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@compodium/core': 0.1.0-beta.7(typescript@5.6.3)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue@3.5.13(typescript@5.6.3))
+      '@nuxt/devtools-kit': 2.3.1(magicast@0.3.5)(vite@6.2.3(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))
+      '@nuxt/kit': 3.16.1(magicast@0.3.5)
+      consola: 3.4.2
+      ufo: 1.5.4
+    transitivePeerDependencies:
+      - magicast
+      - typescript
+      - vite
+      - vue
 
   '@conventional-changelog/git-client@1.0.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)':
     dependencies:
@@ -12240,6 +12323,10 @@ snapshots:
     dependencies:
       magic-string: 0.30.17
 
+  magic-string-ast@0.8.0:
+    dependencies:
+      magic-string: 0.30.17
+
   magic-string@0.25.9:
     dependencies:
       sourcemap-codec: 1.4.8
@@ -14694,6 +14781,14 @@ snapshots:
       unist-util-visit-parents: 6.0.1
 
   universal-user-agent@7.0.2: {}
+
+  unplugin-ast@0.14.4:
+    dependencies:
+      '@babel/generator': 7.26.10
+      ast-kit: 1.4.2
+      magic-string-ast: 0.8.0
+      unplugin: 2.2.2
+      unplugin-utils: 0.2.4
 
   unplugin-auto-import@19.1.1(@nuxt/kit@3.16.1(magicast@0.3.5))(@vueuse/core@13.0.0(vue@3.5.13(typescript@5.6.3))):
     dependencies:
