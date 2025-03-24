@@ -40,6 +40,9 @@ importers:
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
+      '@standard-schema/spec':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@tailwindcss/aspect-ratio':
         specifier: ^0.4.2
         version: 0.4.2(tailwindcss@3.4.17)
@@ -95,9 +98,6 @@ importers:
       '@release-it/conventional-changelog':
         specifier: ^10.0.0
         version: 10.0.0(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.1.0)(release-it@18.1.2(@types/node@22.13.12)(typescript@5.6.3))
-      '@standard-schema/spec':
-        specifier: ^1.0.0
-        version: 1.0.0
       '@vue/test-utils':
         specifier: ^2.4.6
         version: 2.4.6
@@ -122,9 +122,6 @@ importers:
       typescript:
         specifier: 5.6.3
         version: 5.6.3
-      valibot:
-        specifier: ^1.0.0
-        version: 1.0.0(typescript@5.6.3)
       vitest:
         specifier: ^3.0.9
         version: 3.0.9(@types/debug@4.1.12)(@types/node@22.13.12)(happy-dom@17.4.4)(jiti@2.4.2)(terser@5.39.0)(yaml@2.7.0)
