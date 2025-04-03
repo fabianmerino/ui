@@ -53,14 +53,27 @@ useSeoMeta({
               :alt="`Screenshot of ${item.name}`"
               width="311"
               height="194"
-              class="rounded-[calc(var(--ui-radius)*1.5)] group-hover:scale-103 duration-200 transition-transform pointer-events-none"
+              class="rounded-[calc(var(--ui-radius)*1.5)] group-hover:scale-103 duration-200 object-cover w-full transition-transform pointer-events-none"
             />
 
-            <div class="flex items-center gap-1 px-1">
-              <span class="font-medium text-(--ui-text-highlighted)">
-                {{ item.name }}
-              </span>
-              <UIcon name="i-lucide-arrow-right" class="size-4 flex-shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0 text-(--ui-text-muted)" />
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1 px-1 flex-1 min-w-0">
+                <span class="font-medium text-(--ui-text-highlighted) truncate">
+                  {{ item.name }}
+                </span>
+                <UIcon name="i-lucide-arrow-right" class="size-4 shrink-0 opacity-0 group-hover:opacity-100 transition-all duration-200 -translate-x-1 group-hover:translate-x-0 text-(--ui-text-muted)" />
+              </div>
+              <UTooltip v-if="item.github" text="Open repository" :content="{ side: 'top' }">
+                <UButton
+                  :to="item.github"
+                  icon="i-simple-icons-github"
+                  variant="ghost"
+                  color="neutral"
+                  size="xs"
+                  target="_blank"
+                  class="opacity-0 group-hover:opacity-100 transition-all duration-200"
+                />
+              </UTooltip>
             </div>
           </li>
         </ul>
