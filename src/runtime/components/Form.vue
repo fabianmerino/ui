@@ -19,7 +19,7 @@ export interface FormProps<I extends object, O extends object = I> {
    * @param state - The current state of the form.
    * @returns A promise that resolves to an array of FormError objects, or an array of FormError objects directly.
    */
-  validate?: (state: Partial<I> | O) => Promise<FormError[]> | FormError[]
+  validate?: (state: Partial<I>) => Promise<FormError[]> | FormError[]
   /**
    * The list of input events that trigger the form validation.
    * @defaultValue `['blur', 'change', 'input']`
@@ -32,11 +32,11 @@ export interface FormProps<I extends object, O extends object = I> {
    * @defaultValue `300`
    */
   validateOnInputDelay?: number
+
   /**
-   * If true, schema transformations will be applied to the state on submit.
-   * @defaultValue `true`
+   * If true and nested in another form, this form will attach to its parent and validate at the same time.
    */
-  transform?: boolean
+  nested?: boolean
   /**
    * When `true`, all form elements will be disabled on `@submit` event.
    * This will cause any focused input elements to lose their focus state.
@@ -71,7 +71,6 @@ const props = withDefaults(defineProps<FormProps<I, O>>(), {
     return ['input', 'blur', 'change'] as FormInputEvents[]
   },
   validateOnInputDelay: 300,
-  transform: true,
   loadingAuto: true
 })
 
@@ -127,14 +126,14 @@ onUnmounted(() => {
 })
 
 onMounted(async () => {
-  if (parentBus) {
+  if (props.nested && parentBus) {
     await nextTick()
     parentBus.emit({ type: 'attach', validate: _validate, formId })
   }
 })
 
 onUnmounted(() => {
-  if (parentBus) {
+  if (props.nested && parentBus) {
     parentBus.emit({ type: 'detach', formId })
   }
 })
@@ -173,7 +172,7 @@ async function getErrors(): Promise<FormErrorWithId[]> {
   return resolveErrorIds(errs)
 }
 
-async function _validate(opts: { name?: keyof I | (keyof I)[], silent?: boolean, nested?: boolean, transform?: boolean } = { silent: false, nested: true, transform: false }): Promise<O | false> {
+async function _validate(opts: { name?: keyof I | (keyof I)[], silent?: boolean, nested?: boolean } = { silent: false, nested: true }): Promise<O | false> {
   const names = opts.name && !Array.isArray(opts.name) ? [opts.name] : opts.name as (keyof I)[]
 
   const nestedValidatePromises = !names && opts.nested
@@ -210,11 +209,7 @@ async function _validate(opts: { name?: keyof I | (keyof I)[], silent?: boolean,
     throw new FormValidationException(formId, errors.value, childErrors)
   }
 
-  if (opts.transform) {
-    Object.assign(props.state, transformedState.value)
-  }
-
-  return props.state as O
+  return transformedState.value
 }
 
 const loading = ref(false)
@@ -226,7 +221,7 @@ async function onSubmitWrapper(payload: Event) {
   const event = payload as FormSubmitEvent<any>
 
   try {
-    event.data = await _validate({ nested: true, transform: props.transform })
+    event.data = await _validate({ nested: true })
     await props.onSubmit?.(event)
     dirtyFields.clear()
   } catch (error) {
