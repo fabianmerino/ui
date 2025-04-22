@@ -282,8 +282,8 @@ importers:
         specifier: ^3.16.2
         version: 3.16.2(@parcel/watcher@2.5.1)(@types/node@22.13.12)(better-sqlite3@11.9.1)(db0@0.3.1(better-sqlite3@11.9.1))(eslint@9.25.1(jiti@2.4.2))(ioredis@5.6.0)(lightningcss@1.29.2)(magicast@0.3.5)(meow@13.2.0)(optionator@0.9.4)(rollup@4.34.9)(terser@5.39.0)(typescript@5.8.3)(vite@6.3.2(@types/node@22.13.12)(jiti@2.4.2)(lightningcss@1.29.2)(terser@5.39.0)(yaml@2.7.0))(vue-tsc@2.2.0(typescript@5.8.3))(yaml@2.7.0)
       nuxt-component-meta:
-        specifier: https://pkg.pr.new/nuxt-component-meta@fd07bb1
-        version: https://pkg.pr.new/nuxt-component-meta@fd07bb1(magicast@0.3.5)
+        specifier: https://pkg.pr.new/nuxt-component-meta@9d23978
+        version: https://pkg.pr.new/nuxt-component-meta@9d23978(magicast@0.3.5)
       nuxt-llms:
         specifier: ^0.1.2
         version: 0.1.2(magicast@0.3.5)
@@ -5316,8 +5316,8 @@ packages:
     resolution: {integrity: sha512-+e01YjZ9hojroO88dvqiOs/Yh4ff/kbXYcfj70l8KhMpmXITz2GBffT9HqwzFdcTm7iE2C422alG42p7yir2nA==}
     hasBin: true
 
-  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@fd07bb1:
-    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@fd07bb1}
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@9d23978:
+    resolution: {tarball: https://pkg.pr.new/nuxt-component-meta@9d23978}
     version: 0.10.1
     hasBin: true
 
@@ -8948,7 +8948,7 @@ snapshots:
       consola: 3.4.2
       debug: 4.3.7
       defu: 6.1.4
-      destr: 2.0.3
+      destr: 2.0.5
       detab: 3.0.2
       github-slugger: 2.0.0
       hast-util-format: 1.1.0
@@ -13211,7 +13211,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@fd07bb1(magicast@0.3.5):
+  nuxt-component-meta@https://pkg.pr.new/nuxt-component-meta@9d23978(magicast@0.3.5):
     dependencies:
       '@nuxt/kit': 3.16.2(magicast@0.3.5)
       citty: 0.1.6
