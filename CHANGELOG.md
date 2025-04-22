@@ -1,5 +1,21 @@
 # Changelog
 
+## [2.22.0](https://github.com/nuxt/ui/compare/v2.21.1...v2.22.0) (2025-04-22)
+
+### ⚠ BREAKING CHANGES
+
+* **Form:** drop explicit support for `zod` and `valibot` (#3618)
+
+### Bug Fixes
+
+* **Link:** properly pick all `aria-*` & `data-*` attrs ([2bef1e2](https://github.com/nuxt/ui/commit/2bef1e26c6dfd5ee81b11f6da76e257861fc0bef)), closes [#3007](https://github.com/nuxt/ui/issues/3007)
+* **Table:** checkbox still emit `[@select](https://github.com/select)` event ([#3269](https://github.com/nuxt/ui/issues/3269)) ([c0e14d0](https://github.com/nuxt/ui/commit/c0e14d006ea39965e805adbf9698f5cb95e7c965))
+* **Table:** remove type annotation in template ([4e96dcc](https://github.com/nuxt/ui/commit/4e96dcca4213bbb56f1dd465ad7d47374e83bc9a)), closes [#3146](https://github.com/nuxt/ui/issues/3146)
+
+### Code Refactoring
+
+* **Form:** drop explicit support for `zod` and `valibot` ([#3618](https://github.com/nuxt/ui/issues/3618)) ([ee37362](https://github.com/nuxt/ui/commit/ee373629d5a9800921301dcbab309f884eaf83fb))
+
 ## [2.21.1](https://github.com/nuxt/ui/compare/v2.21.0...v2.21.1) (2025-03-08)
 
 ### Features
