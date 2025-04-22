@@ -6,7 +6,7 @@ export function usePortal(portal: Ref<string | HTMLElement | boolean | undefined
   const portalTarget = inject(portalTargetInjectionKey, undefined)
 
   const to = computed(() => {
-    if (typeof portal.value === 'string' || portal.value instanceof HTMLElement) {
+    if (typeof portal.value === 'string' || portal.value) {
       return portal.value
     }
 
