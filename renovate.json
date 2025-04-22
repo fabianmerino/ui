@@ -6,8 +6,6 @@
     "enabled": true
   },
   "ignoreDeps": [
-    "typescript",
-    "vaul-vue",
     "vue-tsc"
   ],
   "baseBranches": ["v2", "v3"],
@@ -21,6 +19,9 @@
       "@tailwindcss/postcss",
       "@tailwindcss/vite"
     ]
+  }, {
+    "matchDepTypes": ["peerDependencies"],
+    "enabled": false
   }, {
     "matchDepTypes": ["resolutions"],
     "enabled": false
