@@ -1,4 +1,4 @@
-import { computed, watch, watchEffect } from 'vue'
+import { computed, watchEffect } from 'vue'
 import colors from 'tailwindcss/colors'
 import { useHead } from '@unhead/vue'
 import type { Plugin } from 'vue'
@@ -52,8 +52,6 @@ export default {
 
       if (typeof document !== 'undefined') {
         watchEffect(() => {
-          console.log('Colors changed, updating style:', JSON.stringify(appConfig.ui.colors))
-
           let styleEl = document.querySelector('#nuxt-ui-colors-vue') as HTMLStyleElement
           if (!styleEl) {
             styleEl = document.createElement('style')
