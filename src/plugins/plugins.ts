@@ -16,6 +16,7 @@ export default function PluginsPlugin(options: NuxtUIOptions) {
   const plugins = globSync(['**/*', '!*.d.ts'], { cwd: join(runtimeDir, 'plugins'), absolute: true })
 
   plugins.unshift(resolvePathSync('../runtime/vue/plugins/head', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
+  plugins.push(resolvePathSync('../runtime/vue/plugins/colors', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
   if (options.colorMode) {
     plugins.push(resolvePathSync('../runtime/vue/plugins/color-mode', { extensions: ['.ts', '.mjs', '.js'], url: import.meta.url }))
   }
