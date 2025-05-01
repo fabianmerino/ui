@@ -86,6 +86,7 @@
   },
   "style": "./dist/runtime/index.css",
   "main": "./dist/module.mjs",
+  "types": "./dist/types.d.mts",
   "files": [
     ".nuxt/ui",
     ".nuxt/ui.css",
