@@ -1,5 +1,5 @@
 ---
-title: Nuxt UI v3
+title: Nuxt UI
 description: Nuxt UI v3 is out! After 1500+ commits, this major redesign brings
   improved accessibility, Tailwind CSS v4 support, and full Vue compatibility
 navigation: false

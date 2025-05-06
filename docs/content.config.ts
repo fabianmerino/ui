@@ -99,6 +99,7 @@ export const collections = {
       image: z.string().editor({ input: 'media' }),
       authors: z.array(Author),
       date: z.string().date(),
+      minRead: z.number(),
       draft: z.boolean().optional(),
       category: z.enum(['Release', 'Tutorial', 'Announcement', 'Article']),
       tags: z.array(z.string())

@@ -1,36 +1,22 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
-import { findPageBreadcrumb, mapContentNavigation } from '#ui-pro/utils/content'
+import { kebabCase } from 'scule'
 
 const route = useRoute()
 
-const { data: page } = await useAsyncData(route.path, () =>
-  queryCollection('blog').path(route.path).first()
-)
-if (!page.value) throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
-const { data: surround } = await useAsyncData(`${route.path}-surround`, () =>
-  queryCollectionItemSurroundings('blog', route.path, {
-    fields: ['description']
+const [{ data: page }, { data: surround }] = await Promise.all([
+  useAsyncData(kebabCase(route.path), () => queryCollection('blog').path(route.path).first()),
+  useAsyncData(`${kebabCase(route.path)}-surround`, () => {
+    return queryCollectionItemSurroundings('blog', route.path, {
+      fields: ['description']
+    }).order('date', 'DESC')
   })
-)
-
-const navigation = inject<Ref<ContentNavigationItem[]>>('navigation', ref([]))
-const blogNavigation = computed(() => navigation.value.find(item => item.path === '/blog')?.children || [])
-
-const breadcrumb = computed(() => mapContentNavigation(findPageBreadcrumb(blogNavigation?.value, page.value)).map(({ icon, ...link }) => link))
-
-if (page.value.image) {
-  defineOgImage({ url: page.value.image })
-} else {
-  defineOgImageComponent('Blog', {
-    headline: breadcrumb.value.map(item => item.label).join(' > ')
-  }, {
-    fonts: ['Geist:400', 'Geist:600']
-  })
+])
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Article not found', fatal: true })
 }
 
-const title = page.value?.seo?.title || page.value?.title
-const description = page.value?.seo?.description || page.value?.description
+const title = page.value.seo?.title || page.value.title
+const description = page.value.seo?.description || page.value.description
 
 useSeoMeta({
   title,
@@ -39,9 +25,17 @@ useSeoMeta({
   ogTitle: title
 })
 
-const articleLink = computed(() => `${window?.location}`)
+if (page.value.image) {
+  defineOgImage({ url: page.value.image })
+} else {
+  defineOgImageComponent('Docs', {
+    headline: 'Blog',
+    title,
+    description
+  })
+}
 
-const formatDate = (dateString: Date) => {
+const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -94,16 +88,9 @@ const formatDate = (dateString: Date) => {
             :value="page"
           />
 
-          <div class="flex items-center justify-end gap-2 text-sm text-muted">
-            <UButton
-              size="sm"
-              variant="link"
-              color="neutral"
-              label="Copy link"
-              @click="copyToClipboard(articleLink, 'Article link copied to clipboard')"
-            />
-          </div>
-          <UContentSurround :surround />
+          <USeparator v-if="surround?.length" />
+
+          <UContentSurround :surround="surround" />
         </UPageBody>
       </UPage>
     </UContainer>
