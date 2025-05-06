@@ -58,6 +58,10 @@ export function useSearchLinks() {
     icon: 'i-lucide-users',
     to: '/team'
   }, {
+    label: 'Blog',
+    icon: 'i-lucide-file-text',
+    to: '/blog'
+  }, {
     label: 'Releases',
     icon: 'i-lucide-rocket',
     to: 'https://github.com/nuxt/ui/releases',
