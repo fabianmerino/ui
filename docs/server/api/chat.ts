@@ -17,7 +17,6 @@ export default defineEventHandler(async (event) => {
 
   return streamText({
     model: workersAI('@cf/meta/llama-3.3-70b-instruct-fp8-fast'),
-    maxTokens: 10000,
     messages,
     system: `You are a helpful assistant for Nuxt UI. Check your knowledge base before answering any questions.
     Only respond to questions using information from tool calls.
@@ -33,7 +32,9 @@ export default defineEventHandler(async (event) => {
           question: z.string().describe('the users question')
         }),
         execute: async ({ question }) => {
-          return (await autorag.aiSearch({ query: question })).response
+          return (await autorag.aiSearch({
+            query: question
+          })).response
         }
       })
     }

@@ -157,7 +157,7 @@ function onClose(e: Event) {
         <UChatMessages
           :messages="messages"
           :status="status"
-          :user="{ side: 'left', variant: 'naked', avatar: { src: 'https://github.com/benjamincanac.png' } }"
+          :user="{ side: 'left', variant: 'naked', icon: 'i-lucide-user' }"
           :assistant="{ icon: 'i-lucide-bot' }"
         >
           <template #content="{ message }">
