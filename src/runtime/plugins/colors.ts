@@ -64,7 +64,8 @@ export default defineNuxtPlugin(() => {
     document.head.appendChild(style)
 
     headData.script = [{
-      innerHTML: 'document.head.removeChild(document.querySelector(\'[data-nuxt-ui-colors]\'))'
+      innerHTML: 'document.head.removeChild(document.querySelector(\'[data-nuxt-ui-colors]\'))',
+      ...(nonce.value ? { nonce: nonce.value } : {})
     }]
   }
 
