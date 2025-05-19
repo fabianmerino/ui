@@ -2,7 +2,7 @@ import icons from './theme/icons'
 
 import { pick } from './runtime/utils'
 
-export const getDefaultUiConfig = (colors?: string[]) => ({
+export const getDefaultUiConfig = (colors?: string[], csp?: { nonce?: string }) => ({
   colors: pick({
     primary: 'green',
     secondary: 'blue',
@@ -13,7 +13,7 @@ export const getDefaultUiConfig = (colors?: string[]) => ({
     neutral: 'slate'
   }, [...(colors || []), 'neutral' as any]),
   icons,
-  csp: {
+  csp: csp || {
     nonce: ''
   }
 })
