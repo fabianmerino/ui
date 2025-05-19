@@ -39,12 +39,6 @@ export interface ModuleOptions {
      * @defaultValue ``
      */
     nonce?: string
-
-    /**
-     * Enable nonce for inline scripts.
-     * @defaultValue ``
-     */
-    scriptNonce?: string
   }
 
   /**
