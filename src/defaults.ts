@@ -23,7 +23,9 @@ export const defaultOptions = {
     colors: undefined,
     transitions: true
   },
-  csp: false
+  csp: {
+    nonce: false
+  }
 }
 
 export const resolveColors = (colors?: string[]) => {

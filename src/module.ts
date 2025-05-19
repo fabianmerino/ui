@@ -30,10 +30,18 @@ export interface ModuleOptions {
 
   /**
    * Configure Content Security Policy for Nuxt UI
-   * @defaultValue `false`
+   * @defaultValue `{ nonce: false }`
    * @link https://ui.nuxt.com/getting-started/installation/nuxt#csp
    */
-  csp?: boolean
+  csp?: {
+    /**
+     * Enable nonce for inline styles.
+     * Set to `true` to automatically generate and use a nonce.
+     * Provide a string to use a specific nonce.
+     * @defaultValue `false`
+     */
+    nonce?: boolean | string
+  }
 
   /**
    * Customize how the theme is generated
