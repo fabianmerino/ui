@@ -115,6 +115,16 @@ export interface SelectMenuProps<T extends ArrayOrNested<SelectMenuItem> = Array
    * @defaultValue false
    */
   ignoreFilter?: boolean
+  /**
+   * Estimated size (in px) of each item for virtualization.
+   * @defaultValue 35
+   */
+  estimateSize?: number
+  /**
+   * Number of items rendered outside the visible area for virtualization.
+   * @defaultValue 5
+   */
+  overscan?: number
   class?: any
   ui?: SelectMenu['slots']
 }
@@ -166,7 +176,7 @@ export interface SelectMenuSlots<
 
 <script setup lang="ts" generic="T extends ArrayOrNested<SelectMenuItem>, VK extends GetItemKeys<T> | undefined = undefined, M extends boolean = false">
 import { computed, toRef, toRaw } from 'vue'
-import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
+import { ComboboxRoot, ComboboxArrow, ComboboxAnchor, ComboboxInput, ComboboxTrigger, ComboboxPortal, ComboboxContent, ComboboxEmpty, ComboboxGroup, ComboboxLabel, ComboboxSeparator, ComboboxItem, ComboboxItemIndicator, ComboboxViewport, ComboboxVirtualizer, FocusScope, useForwardPropsEmits, useFilter } from 'reka-ui'
 import { defu } from 'defu'
 import { reactivePick, createReusableTemplate } from '@vueuse/core'
 import { useAppConfig } from '#imports'
@@ -189,7 +199,9 @@ const props = withDefaults(defineProps<SelectMenuProps<T, VK, M>>(), {
   searchInput: true,
   labelKey: 'label' as never,
   resetSearchTermOnBlur: true,
-  resetSearchTermOnSelect: true
+  resetSearchTermOnSelect: true,
+  estimateSize: 35,
+  overscan: 5
 })
 const emits = defineEmits<SelectMenuEmits<T, VK, M>>()
 const slots = defineSlots<SelectMenuSlots<T, VK, M>>()
@@ -344,6 +356,12 @@ function onSelect(e: Event, item: SelectMenuItem) {
 function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
   return typeof item === 'object' && item !== null
 }
+
+function getItemTextContent(item: SelectMenuItem): string {
+  if (typeof item === 'string') return item
+  if (typeof item !== 'object' || item === null) return String(item)
+  return get(item, props.labelKey as string) || String(item)
+}
 </script>
 
 <!-- eslint-disable vue/no-template-shadow -->
@@ -418,58 +436,63 @@ function isSelectItem(item: SelectMenuItem): item is _SelectMenuItem {
             </slot>
           </ComboboxEmpty>
 
-          <div role="presentation" :class="ui.viewport({ class: props.ui?.viewport })">
+          <ComboboxViewport :class="ui.viewport({ class: props.ui?.viewport })">
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'top'" />
 
-            <ComboboxGroup v-for="(group, groupIndex) in filteredGroups" :key="`group-${groupIndex}`" :class="ui.group({ class: props.ui?.group })">
-              <template v-for="(item, index) in group" :key="`group-${groupIndex}-${index}`">
-                <ComboboxLabel v-if="isSelectItem(item) && item.type === 'label'" :class="ui.label({ class: [props.ui?.label, item.ui?.label, item.class] })">
-                  {{ get(item, props.labelKey as string) }}
-                </ComboboxLabel>
+            <ComboboxVirtualizer
+              v-slot="{ option }"
+              :options="filteredItems as AcceptableValue[]"
+              :estimate-size="estimateSize"
+              :overscan="overscan"
+              :text-content="getItemTextContent"
+              :class="ui.group({ class: props.ui?.group })"
+            >
+              <ComboboxLabel v-if="isSelectItem(option) && option.type === 'label'" :class="ui.label({ class: [props.ui?.label, option.ui?.label, option.class] })">
+                {{ get(option, props.labelKey as string) }}
+              </ComboboxLabel>
 
-                <ComboboxSeparator v-else-if="isSelectItem(item) && item.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, item.ui?.separator, item.class] })" />
+              <ComboboxSeparator v-else-if="isSelectItem(option) && option.type === 'separator'" :class="ui.separator({ class: [props.ui?.separator, option.ui?.separator, option.class] })" />
 
-                <ComboboxItem
-                  v-else
-                  :class="ui.item({ class: [props.ui?.item, isSelectItem(item) && item.ui?.item, isSelectItem(item) && item.class] })"
-                  :disabled="isSelectItem(item) && item.disabled"
-                  :value="props.valueKey && isSelectItem(item) ? get(item, props.valueKey as string) : item"
-                  @select="onSelect($event, item)"
-                >
-                  <slot name="item" :item="(item as NestedItem<T>)" :index="index">
-                    <slot name="item-leading" :item="(item as NestedItem<T>)" :index="index">
-                      <UIcon v-if="isSelectItem(item) && item.icon" :name="item.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, item.ui?.itemLeadingIcon] })" />
-                      <UAvatar v-else-if="isSelectItem(item) && item.avatar" :size="((item.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="item.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, item.ui?.itemLeadingAvatar] })" />
-                      <UChip
-                        v-else-if="isSelectItem(item) && item.chip"
-                        :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
-                        inset
-                        standalone
-                        v-bind="item.chip"
-                        :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, item.ui?.itemLeadingChip] })"
-                      />
-                    </slot>
-
-                    <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-                      <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-                        {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-                      </slot>
-                    </span>
-
-                    <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
-                      <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
-
-                      <ComboboxItemIndicator as-child>
-                        <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
-                      </ComboboxItemIndicator>
-                    </span>
+              <ComboboxItem
+                v-else
+                :class="ui.item({ class: [props.ui?.item, isSelectItem(option) && option.ui?.item, isSelectItem(option) && option.class] })"
+                :disabled="isSelectItem(option) && option.disabled"
+                :value="props.valueKey && isSelectItem(option) ? get(option, props.valueKey as string) : option"
+                @select="onSelect($event, option)"
+              >
+                <slot name="item" :item="(option as NestedItem<T>)" :index="0">
+                  <slot name="item-leading" :item="(option as NestedItem<T>)" :index="0">
+                    <UIcon v-if="isSelectItem(option) && option.icon" :name="option.icon" :class="ui.itemLeadingIcon({ class: [props.ui?.itemLeadingIcon, option.ui?.itemLeadingIcon] })" />
+                    <UAvatar v-else-if="isSelectItem(option) && option.avatar" :size="((option.ui?.itemLeadingAvatarSize || props.ui?.itemLeadingAvatarSize || ui.itemLeadingAvatarSize()) as AvatarProps['size'])" v-bind="option.avatar" :class="ui.itemLeadingAvatar({ class: [props.ui?.itemLeadingAvatar, option.ui?.itemLeadingAvatar] })" />
+                    <UChip
+                      v-else-if="isSelectItem(option) && option.chip"
+                      :size="((props.ui?.itemLeadingChipSize || ui.itemLeadingChipSize()) as ChipProps['size'])"
+                      inset
+                      standalone
+                      v-bind="option.chip"
+                      :class="ui.itemLeadingChip({ class: [props.ui?.itemLeadingChip, option.ui?.itemLeadingChip] })"
+                    />
                   </slot>
-                </ComboboxItem>
-              </template>
-            </ComboboxGroup>
+
+                  <span :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(option) && option.ui?.itemLabel] })">
+                    <slot name="item-label" :item="(option as NestedItem<T>)" :index="0">
+                      {{ isSelectItem(option) ? get(option, props.labelKey as string) : option }}
+                    </slot>
+                  </span>
+
+                  <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(option) && option.ui?.itemTrailing] })">
+                    <slot name="item-trailing" :item="(option as NestedItem<T>)" :index="0" />
+
+                    <ComboboxItemIndicator as-child>
+                      <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(option) && option.ui?.itemTrailingIcon] })" />
+                    </ComboboxItemIndicator>
+                  </span>
+                </slot>
+              </ComboboxItem>
+            </ComboboxVirtualizer>
 
             <ReuseCreateItemTemplate v-if="createItem && createItemPosition === 'bottom'" />
-          </div>
+          </ComboboxViewport>
 
           <slot name="content-bottom" />
         </FocusScope>
