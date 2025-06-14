@@ -148,6 +148,59 @@ exports[`FormField > renders with label slot correctly 1`] = `
 </div>"
 `;
 
+exports[`FormField > renders with maxErrors correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
+    <div id="v-0-0-error" class="mt-2 text-error">This should be visible</div>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with maxErrors false correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
+    <div id="v-0-0-error" class="mt-2 text-error">This should be visible</div>
+    <div id="v-0-0-error" class="mt-2 text-error">This should be visible</div>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with maxErrors negative correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
+    <div id="v-0-0-error" class="mt-2 text-error">This should be visible</div>
+    <div id="v-0-0-error" class="mt-2 text-error">This should be visible</div>
+  </div>
+</div>"
+`;
+
+exports[`FormField > renders with multiple errors correctly 1`] = `
+"<div class="text-sm">
+  <div class="">
+    <!--v-if-->
+    <!--v-if-->
+  </div>
+  <div class="">
+    <div id="v-0-0-error" class="mt-2 text-error">Username is already taken</div>
+  </div>
+</div>"
+`;
+
 exports[`FormField > renders with required correctly 1`] = `
 "<div class="text-sm">
   <div class="">
