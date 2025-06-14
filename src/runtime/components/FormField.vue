@@ -19,6 +19,20 @@ export interface FormFieldProps {
   description?: string
   help?: string
   error?: string | boolean
+
+  /**
+   * An array of errors for this field.
+   * Note that only one error is displayed by default. You can use `maxErrors` to control the number of displayed errors.
+   * @defaultValue `1`
+   */
+  errors?: string[]
+
+  /**
+   * The maximum number of errors to display. If `false` or negative, display all available errors.
+   * @defaultValue `1`
+   */
+  maxErrors?: number | false
+
   hint?: string
   /**
    * @defaultValue 'md'
@@ -42,7 +56,7 @@ export interface FormFieldSlots {
   description(props: { description?: string }): any
   help(props: { help?: string }): any
   error(props: { error?: string | boolean }): any
-  default(props: { error?: string | boolean }): any
+  default(props: { error?: string | boolean, errors?: string[] }): any
 }
 </script>
 
@@ -54,7 +68,7 @@ import { formFieldInjectionKey, inputIdInjectionKey } from '../composables/useFo
 import { tv } from '../utils/tv'
 import type { FormError, FormFieldInjectedOptions } from '../types/form'
 
-const props = defineProps<FormFieldProps>()
+const props = withDefaults(defineProps<FormFieldProps>(), { maxErrors: 1 })
 const slots = defineSlots<FormFieldSlots>()
 
 const appConfig = useAppConfig() as FormField['AppConfig']
@@ -66,7 +80,24 @@ const ui = computed(() => tv({ extend: tv(theme), ...(appConfig.ui?.formField ||
 
 const formErrors = inject<Ref<FormError[]> | null>('form-errors', null)
 
-const error = computed(() => props.error || formErrors?.value?.find(error => error.name && (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))))?.message)
+const errors = computed(() =>
+  (props.error && typeof props.error === 'string' ? [props.error] : props.errors)
+  || formErrors?.value?.flatMap((error) => {
+    if (!error.name) return []
+    if (error.name === props.name || (props.errorPattern && error.name.match(props.errorPattern))) {
+      return [error.message]
+    }
+    return []
+  }))
+
+const error = computed(() => errors.value?.[0] ?? props.error)
+
+const displayedErrors = computed(() =>
+  props.maxErrors === false
+  || (!!props.maxErrors && props.maxErrors < 0)
+    ? errors.value
+    : errors.value?.slice(0, props.maxErrors)
+)
 
 const id = ref(useId())
 // Copies id's initial value to bind aria-attributes such as aria-describedby.
@@ -113,9 +144,16 @@ provide(formFieldInjectionKey, computed(() => ({
     </div>
 
     <div :class="[(label || !!slots.label || description || !!slots.description) && ui.container({ class: props.ui?.container })]">
-      <slot :error="error" />
+      <slot :error="error" :errors="errors" />
 
-      <div v-if="(typeof error === 'string' && error) || !!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
+      <template v-if="(typeof error === 'string' && error)">
+        <div v-for="err in displayedErrors" :id="`${ariaId}-error`" :key="err" :class="ui.error({ class: props.ui?.error })">
+          <slot name="error" :error="err">
+            {{ err }}
+          </slot>
+        </div>
+      </template>
+      <div v-else-if="!!slots.error" :id="`${ariaId}-error`" :class="ui.error({ class: props.ui?.error })">
         <slot name="error" :error="error">
           {{ error }}
         </slot>

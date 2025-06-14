@@ -5,7 +5,9 @@ const sizes = Object.keys(theme.variants.size) as Array<keyof typeof theme.varia
 
 const feedbacks = [
   { description: 'This is a description' },
+  { error: true },
   { error: 'This is an error' },
+  { errors: ['This is an error', 'This is another error', 'This one is not visible'], maxErrors: 2 },
   { hint: 'This is a hint' },
   { help: 'Help! I need somebody!' },
   { required: true }
@@ -14,7 +16,7 @@ const feedbacks = [
 
 <template>
   <div class="flex flex-col items-center gap-4">
-    <div class="flex flex-col gap-4 ms-[-38px]">
+    <div class="flex flex-col gap-4 ms-[-92px]">
       <div v-for="(feedback, count) in feedbacks" :key="count" class="flex items-center">
         <UFormField v-bind="feedback" label="Email" name="email">
           <UInput placeholder="john@lennon.com" />
