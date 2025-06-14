@@ -4,7 +4,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/switch'
 import { flushPromises, mount } from '@vue/test-utils'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormValidateOn } from '~/src/module'
 
 describe('Switch', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -55,7 +55,7 @@ describe('Switch', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormValidateOn[]) {
       const wrapper = await renderForm({
         props: {
           validateOn,

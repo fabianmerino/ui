@@ -4,7 +4,7 @@ import Textarea, { type TextareaProps, type TextareaSlots } from '../../src/runt
 import ComponentRender from '../component-render'
 import theme from '#build/ui/textarea'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormValidateOn } from '~/src/module'
 
 describe('Textarea', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -107,7 +107,7 @@ describe('Textarea', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[], eagerValidation?: boolean) {
+    async function createForm(validateOn?: FormValidateOn[], eagerValidation?: boolean) {
       const wrapper = await renderForm({
         props: {
           validateOn,

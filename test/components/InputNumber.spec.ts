@@ -5,7 +5,7 @@ import { reactive } from 'vue'
 import InputNumber, { type InputNumberProps, type InputNumberSlots } from '../../src/runtime/components/InputNumber.vue'
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input-number'
-import type { FormInputEvents } from '~/src/module'
+import type { FormValidateOn } from '~/src/module'
 import { renderForm } from '../utils/form'
 
 describe('InputNumber', () => {
@@ -61,7 +61,7 @@ describe('InputNumber', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormValidateOn[]) {
       const wrapper = await renderForm({
         state: reactive({ value: 0 }),
         props: {

@@ -57,7 +57,7 @@ const disabled = ref(false)
     <div class="border border-default rounded-lg">
       <div class="py-2 px-4 flex gap-4 items-center">
         <UFormField label="Validate on" class="flex items-center gap-2">
-          <USelectMenu v-model="validateOn" :items="['input', 'change', 'blur']" multiple class="w-48" />
+          <USelectMenu v-model="validateOn" :items="['input', 'change', 'blur', 'error-input']" multiple class="w-48" />
         </UFormField>
         <UCheckbox v-model="disabled" label="Disabled" />
       </div>

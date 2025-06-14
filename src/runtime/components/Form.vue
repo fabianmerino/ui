@@ -2,7 +2,7 @@
 import type { DeepReadonly } from 'vue'
 import type { AppConfig } from '@nuxt/schema'
 import theme from '#build/ui/form'
-import type { FormSchema, FormError, FormInputEvents, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData } from '../types/form'
+import type { FormSchema, FormError, FormErrorEvent, FormSubmitEvent, FormEvent, Form, FormErrorWithId, InferInput, InferOutput, FormData, FormValidateOn } from '../types/form'
 import type { ComponentConfig } from '../types/utils'
 
 type FormConfig = ComponentConfig<typeof theme, AppConfig, 'form'>
@@ -23,7 +23,8 @@ export interface FormProps<S extends FormSchema, T extends boolean = true> {
    * The list of input events that trigger the form validation.
    * @defaultValue `['blur', 'change', 'input']`
    */
-  validateOn?: FormInputEvents[]
+  validateOn?: FormValidateOn[]
+
   /** Disable all inputs inside the form. */
   disabled?: boolean
   /**
@@ -77,7 +78,7 @@ type O = InferOutput<S>
 
 const props = withDefaults(defineProps<FormProps<S, T>>(), {
   validateOn() {
-    return ['input', 'blur', 'change'] as FormInputEvents[]
+    return ['input', 'blur', 'change'] as FormValidateOn[]
   },
   validateOnInputDelay: 300,
   attach: true,
@@ -110,12 +111,14 @@ onMounted(async () => {
       nestedForms.value.set(event.formId, { validate: event.validate })
     } else if (event.type === 'detach') {
       nestedForms.value.delete(event.formId)
-    } else if (props.validateOn?.includes(event.type) && !loading.value) {
+    } else if (props.validateOn?.includes(event.type as FormValidateOn) && !loading.value) {
       if (event.type !== 'input') {
         await _validate({ name: event.name, silent: true, nested: false })
       } else if (event.eager || blurredFields.has(event.name)) {
         await _validate({ name: event.name, silent: true, nested: false })
       }
+    } else if (props.validateOn?.includes('error-input') && errors.value?.find(e => e.name === event.name)) {
+      await _validate({ name: event.name, silent: true, nested: false })
     }
 
     if (event.type === 'blur') {

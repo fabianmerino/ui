@@ -4,7 +4,7 @@ import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
 import { flushPromises, mount } from '@vue/test-utils'
-import type { FormInputEvents } from '~/src/module'
+import type { FormValidateOn } from '~/src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('SelectMenu', () => {
@@ -113,7 +113,7 @@ describe('SelectMenu', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormValidateOn[]) {
       const wrapper = await renderForm({
         props: {
           validateOn,

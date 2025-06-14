@@ -4,8 +4,8 @@ import Input, { type InputProps, type InputSlots } from '../../src/runtime/compo
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 
+import type { FormValidateOn } from '~/src/module'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
 
 describe('Input', () => {
   const sizes = Object.keys(theme.variants.size) as any
@@ -104,7 +104,7 @@ describe('Input', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[], eagerValidation?: boolean) {
+    async function createForm(validateOn?: FormValidateOn[], eagerValidation?: boolean) {
       const wrapper = await renderForm({
         props: {
           validateOn,
@@ -154,6 +154,18 @@ describe('Input', () => {
     test('validate on input works', async () => {
       const { input, wrapper } = await createForm(['input'], true)
       await input.setValue('value')
+      expect(wrapper.text()).toContain('Error message')
+
+      await input.setValue('valid')
+      expect(wrapper.text()).not.toContain('Error message')
+    })
+
+    test('validate on error-input works', async () => {
+      const { input, wrapper } = await createForm(['error-input', 'blur'], true)
+      await input.setValue('value')
+      expect(wrapper.text()).not.toContain('Error message')
+
+      await input.trigger('blur')
       expect(wrapper.text()).toContain('Error message')
 
       await input.setValue('valid')

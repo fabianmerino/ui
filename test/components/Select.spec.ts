@@ -4,7 +4,7 @@ import Select, { type SelectProps, type SelectSlots } from '../../src/runtime/co
 import ComponentRender from '../component-render'
 import theme from '#build/ui/input'
 import { renderForm } from '../utils/form'
-import type { FormInputEvents } from '~/src/module'
+import type { FormValidateOn } from '~/src/module'
 import { expectEmitPayloadType } from '../utils/types'
 
 describe('Select', () => {
@@ -107,7 +107,7 @@ describe('Select', () => {
   })
 
   describe('form integration', async () => {
-    async function createForm(validateOn?: FormInputEvents[]) {
+    async function createForm(validateOn?: FormValidateOn[]) {
       const wrapper = await renderForm({
         props: {
           validateOn,

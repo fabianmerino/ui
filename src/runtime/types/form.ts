@@ -46,6 +46,8 @@ export type FormData<S extends FormSchema, T extends boolean = true> = T extends
 
 export type FormInputEvents = 'input' | 'blur' | 'change' | 'focus'
 
+export type FormValidateOn = 'input' | 'blur' | 'change' | 'error-input'
+
 export interface FormError<P extends string = string> {
   name?: P
   message: string

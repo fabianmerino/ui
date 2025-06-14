@@ -98,6 +98,7 @@ The Form component automatically triggers validation when an input emits an `inp
 - Validation on `input` occurs **as you type**.
 - Validation on `change` occurs when you **commit to a value**.
 - Validation on `blur` happens when an input **loses focus**.
+- Validation on `error-input` happens when as you type on an input with an error.
 
 You can control when validation happens this using the `validate-on` prop.
 
