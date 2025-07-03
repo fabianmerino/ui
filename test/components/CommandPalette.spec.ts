@@ -74,7 +74,8 @@ describe('CommandPalette', () => {
     ['with placeholder', { props: { ...props, placeholder: 'Search...' } }],
     ['with disabled', { props: { ...props, disabled: true } }],
     ['with icon', { props: { ...props, icon: 'i-lucide-terminal' } }],
-    ['with inputTrailingIcon', { props: { ...props, inputTrailingIcon: 'i-lucide-settings' } }],
+    ['with trailingIcon', { props: { ...props, inputTrailingIcon: 'i-lucide-settings' } }],
+    ['with itemTrailingIcon', { props: { ...props, itemTrailingIcon: 'i-lucide-arrow-right' } }],
     ['with loading', { props: { ...props, loading: true } }],
     ['with loadingIcon', { props: { ...props, loading: true, loadingIcon: 'i-lucide-loader' } }],
     ['with selectedIcon', { props: { ...props, selectedIcon: 'i-lucide-badge-check', modelValue: groups[2].items[0] } }],
@@ -91,6 +92,7 @@ describe('CommandPalette', () => {
     ['with item-label slot', { props, slots: { 'item-label': () => 'Item label slot' } }],
     ['with item-trailing slot', { props, slots: { 'item-trailing': () => 'Item trailing slot' } }],
     ['with custom slot', { props, slots: { custom: () => 'Custom slot' } }],
+    ['with actions slot', { props, slots: { actions: () => 'Actions slot' } }],
     ['with close slot', { props: { ...props, close: true }, slots: { close: () => 'Close slot' } }]
   ])('renders %s correctly', async (nameOrHtml: string, options: { props?: CommandPaletteProps, slots?: Partial<CommandPaletteSlots> }) => {
     const html = await ComponentRender(nameOrHtml, options, CommandPalette)

@@ -154,7 +154,6 @@ type SlotProps<T> = (props: { item: T, index: number }) => any
 export type CommandPaletteSlots<G extends CommandPaletteGroup<T> = CommandPaletteGroup<any>, T extends CommandPaletteItem = CommandPaletteItem> = {
   'empty'(props: { searchTerm?: string }): any
   'back'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
-  'trailing'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'actions'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'close'(props: { ui: { [K in keyof Required<CommandPalette['slots']>]: (props?: Record<string, any>) => string } }): any
   'item': SlotProps<T>
@@ -362,10 +361,8 @@ function onSelect(e: Event, item: T) {
           </slot>
         </template>
 
-        <template v-if="trailingIcon || !!slots.trailing || close || !!slots.close || !!slots.actions" #trailing>
-          <slot name="trailing" :ui="ui">
-            <UIcon v-if="trailingIcon" :name="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
-          </slot>
+        <template v-if="trailingIcon || close || !!slots.close || !!slots.actions" #trailing>
+          <UIcon v-if="trailingIcon" :name="trailingIcon" :class="ui.trailingIcon({ class: props.ui?.trailingIcon })" />
           <slot name="actions" :ui="ui" />
           <slot name="close" :ui="ui">
             <UButton
