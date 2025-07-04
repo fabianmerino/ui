@@ -22,10 +22,6 @@ const { data: users, status } = await useFetch('https://jsonplaceholder.typicode
 const loading = ref(false)
 
 const groups = computed(() => [{
-  id: 'users',
-  label: searchTerm.value ? `Users matching “${searchTerm.value}”...` : 'Users',
-  items: users.value || []
-}, {
   id: 'actions',
   items: [{
     label: 'Add new file',
@@ -74,6 +70,12 @@ const groups = computed(() => [{
       toast.add({ title: 'Label added!' })
     },
     kbds: ['meta', 'L']
+  }, {
+    label: 'Set Wallpaper',
+    suffix: 'Choose from beautiful wallpaper collection.',
+    icon: 'i-lucide-image',
+    interface: 'wallpaper',
+    placeholder: 'Search wallpapers...'
   }, {
     label: 'More actions',
     placeholder: 'Search actions...',
@@ -140,6 +142,116 @@ const labels = [{
 }]
 const label = ref()
 
+const wallpapers = [
+  {
+    id: 1,
+    name: 'red_distortion_1',
+    gradient: 'from-red-500 via-orange-500 to-pink-500',
+    category: 'Abstract',
+    featured: true
+  },
+  {
+    id: 2,
+    name: 'blue_distortion_1',
+    gradient: 'from-blue-600 via-purple-600 to-indigo-600',
+    category: 'Abstract',
+    featured: true
+  },
+  {
+    id: 3,
+    name: 'mono_dark_distortion_1',
+    gradient: 'from-gray-900 via-gray-700 to-gray-800',
+    category: 'Monochrome',
+    featured: false
+  },
+  {
+    id: 4,
+    name: 'chromatic_dark_1',
+    gradient: 'from-emerald-600 via-teal-600 to-cyan-600',
+    category: 'Chromatic',
+    featured: true
+  },
+  {
+    id: 5,
+    name: 'red_distortion_2',
+    gradient: 'from-rose-600 via-red-600 to-orange-600',
+    category: 'Abstract',
+    featured: false
+  },
+  {
+    id: 6,
+    name: 'purple_cosmic_1',
+    gradient: 'from-violet-700 via-purple-700 to-fuchsia-700',
+    category: 'Cosmic',
+    featured: true
+  },
+  {
+    id: 7,
+    name: 'golden_sunset_1',
+    gradient: 'from-yellow-500 via-orange-500 to-red-500',
+    category: 'Nature',
+    featured: false
+  },
+  {
+    id: 8,
+    name: 'ocean_deep_1',
+    gradient: 'from-blue-800 via-blue-900 to-indigo-900',
+    category: 'Nature',
+    featured: true
+  },
+  {
+    id: 9,
+    name: 'mono_light_distortion_1',
+    gradient: 'from-gray-200 via-gray-300 to-gray-400',
+    category: 'Monochrome',
+    featured: false
+  },
+  {
+    id: 10,
+    name: 'green_matrix_1',
+    gradient: 'from-green-800 via-emerald-700 to-teal-700',
+    category: 'Chromatic',
+    featured: false
+  },
+  {
+    id: 11,
+    name: 'pink_dreams_1',
+    gradient: 'from-pink-500 via-rose-500 to-purple-500',
+    category: 'Abstract',
+    featured: true
+  },
+  {
+    id: 12,
+    name: 'midnight_blue_1',
+    gradient: 'from-slate-900 via-blue-900 to-indigo-900',
+    category: 'Nature',
+    featured: false
+  }
+]
+
+const filteredWallpapers = computed(() => {
+  let filtered = wallpapers
+
+  // Filter by search term
+  if (searchTerm.value.trim()) {
+    const search = searchTerm.value.toLowerCase()
+    filtered = filtered.filter(w =>
+      w.name.toLowerCase().includes(search)
+      || w.category.toLowerCase().includes(search)
+    )
+  }
+
+  return filtered
+})
+
+function setWallpaper(wallpaper: any) {
+  toast.add({
+    title: `Wallpaper set to ${wallpaper.name}!`,
+    description: 'Your desktop wallpaper has been updated.',
+    icon: 'i-lucide-image'
+  })
+}
+
 // function onSelect(item: typeof groups.value[number]['items'][number]) {
 function onSelect(item: any) {
   console.log('Selected', item)
@@ -166,7 +278,44 @@ defineShortcuts({
       multiple
       class="sm:max-h-80"
       @update:model-value="onSelect"
-    />
+    >
+      <template #interface="{ interfaceName }">
+        <div v-if="interfaceName === 'wallpaper'" class="flex flex-col h-full w-full">
+          <div class="flex-1 overflow-y-auto p-6">
+            <div class="grid grid-cols-4 gap-4">
+              <div
+                v-for="wallpaper in filteredWallpapers"
+                :key="wallpaper.id"
+                class="group relative cursor-pointer"
+                @click="setWallpaper(wallpaper)"
+              >
+                <div
+                  class="aspect-video rounded-lg bg-gradient-to-br shadow-lg ring-1 ring-black/5"
+                  :class="wallpaper.gradient"
+                />
+                <div class="mt-2 px-1">
+                  <div class="flex items-center gap-2">
+                    <h3 class="text-sm font-medium text-highlighted truncate">
+                      {{ wallpaper.name }}
+                    </h3>
+                    <UChip
+                      v-if="wallpaper.featured"
+                      label="★"
+                      size="xs"
+                      color="primary"
+                      class="shrink-0"
+                    />
+                  </div>
+                  <p class="text-xs text-dimmed">
+                    {{ wallpaper.category }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </template>
+    </UCommandPalette>
   </DefineTemplate>
 
   <div class="flex-1 flex flex-col gap-12 w-full max-w-lg">
