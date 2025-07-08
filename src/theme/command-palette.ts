@@ -8,6 +8,7 @@ export default (options: Required<ModuleOptions>) => ({
     back: 'p-0',
     trailingIcon: 'shrink-0 size-5 text-dimmed',
     content: 'relative overflow-hidden flex flex-col',
+    footer: 'p-1',
     viewport: 'relative divide-y divide-default scroll-py-1 overflow-y-auto flex-1 focus:outline-none',
     group: 'p-1 isolate',
     empty: 'py-6 text-center text-sm text-muted',
