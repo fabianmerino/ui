@@ -1,4 +1,5 @@
 ---
+title: Popover
 description: A non-modal dialog that floats around a trigger element.
 category: overlay
 links:
