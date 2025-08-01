@@ -222,59 +222,7 @@ onMounted(async () => {
       </ul>
     </UPageSection>
     <UPageSection v-bind="page.features2" :ui="{ container: 'py-16 sm:py-16 lg:py-16', features: 'mt-0' }" class="border-y border-default" />
-    <UPageSection
-      v-if="page.pricing"
-      :title="page.pricing.title"
-      :description="page.pricing.description"
-      orientation="vertical"
-      :ui="{
-        title: 'sm:text-left',
-        description: 'sm:text-left',
-        links: 'sm:justify-start',
-        container: 'relative !pb-0',
-        wrapper: 'sm:pl-8'
-      }"
-    >
-      <div aria-hidden="true" class="absolute z-[-1] border-x border-default inset-0 mx-4 sm:mx-6 lg:mx-8" />
-      <UPricingPlans compact class="-space-x-px">
-        <UPricingPlan
-          v-for="(plan, index) in page.pricing.plans"
-          :key="index"
-          :title="plan.title"
-          :description="plan.description"
-          :price="plan.price"
-          :discount="plan.discount"
-          :billing-period="plan.billing_period"
-          :billing-cycle="plan.billing_cycle"
-          :highlight="plan.highlight"
-          :features="plan.features"
-          :button="plan.button"
-          :terms="plan.terms"
-          class="rounded-none"
-          :class="plan.class"
-        >
-          <template #features>
-            <li v-for="(feature, i) in plan.features" :key="i" class="flex items-center gap-2 min-w-0">
-              <UIcon name="i-lucide-circle-check" class="size-5 shrink-0 text-primary" />
-              <MDC :value="feature" unwrap="p" tag="span" class="text-sm truncate text-accented" :cache-key="`figma-pricing-plan-${index}-feature-${i}`" />
-            </li>
-          </template>
-          <template #button>
-            <div class="flex flex-col w-full items-center gap-2">
-              <UButton v-bind="plan.button" block size="lg" />
-              <UButton
-                v-if="plan.extraButton"
-                v-bind="plan.extraButton"
-                block
-                size="lg"
-                variant="outline"
-                color="neutral"
-              />
-            </div>
-          </template>
-        </UPricingPlan>
-      </UPricingPlans>
-    </UPageSection>
+
     <UPageCTA v-if="page.customers" :title="page.customers.title" :ui="{ title: '!text-base font-medium', container: 'sm:py-12 sm:gap-8' }" variant="outline" class="rounded-none">
       <UPageMarquee pause-on-hover :ui="{ root: '[--duration:40s]' }">
         <img
