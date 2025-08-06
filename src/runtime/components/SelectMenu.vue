@@ -501,7 +501,7 @@ defineExpose({
                       <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />
 
                       <ComboboxItemIndicator as-child>
-                        <UIcon :name="selectedIcon || appConfig.ui.icons?.check || 'i-lucide-check'" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
+                        <UIcon :name="selectedIcon || appConfig.ui.icons.check" :class="ui.itemTrailingIcon({ class: [props.ui?.itemTrailingIcon, isSelectItem(item) && item.ui?.itemTrailingIcon] })" />
                       </ComboboxItemIndicator>
                     </span>
                   </slot>
