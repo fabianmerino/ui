@@ -25,7 +25,9 @@ export default (options: Required<ModuleOptions>) => {
       itemLeadingChipSize: '',
       itemTrailing: 'ms-auto inline-flex gap-1.5 items-center',
       itemTrailingIcon: 'shrink-0',
-      itemLabel: 'truncate'
+      itemLabel: 'truncate',
+      itemDescription: 'text-muted text-xs truncate',
+      itemContent: 'flex flex-col min-w-0'
     },
     variants: {
       ...buttonGroupVariant,

@@ -34,11 +34,16 @@ describe('Select', () => {
     icon: 'i-lucide-circle-x'
   }]
 
+  const itemsWithDescription = [
+    ...items.map(item => ({ ...item, description: 'Description' }))
+  ]
+
   const props = { open: true, portal: false, items }
 
   it.each([
     // Props
     ['with items', { props }],
+    ['with items with description', { props: { ...props, items: itemsWithDescription } }],
     ['with modelValue', { props: { ...props, modelValue: items[0] } }],
     ['with defaultValue', { props: { ...props, defaultValue: items[0] } }],
     ['with valueKey', { props: { ...props, valueKey: 'label' } }],

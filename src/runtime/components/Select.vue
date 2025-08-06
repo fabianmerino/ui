@@ -10,6 +10,7 @@ type Select = ComponentConfig<typeof theme, AppConfig, 'select'>
 
 interface SelectItemBase {
   label?: string
+  description?: string
   /**
    * @IconifyIcon
    */
@@ -25,7 +26,7 @@ interface SelectItemBase {
   disabled?: boolean
   onSelect?(e?: Event): void
   class?: any
-  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemTrailing' | 'itemTrailingIcon'>
+  ui?: Pick<Select['slots'], 'label' | 'separator' | 'item' | 'itemLeadingIcon' | 'itemLeadingAvatarSize' | 'itemLeadingAvatar' | 'itemLeadingChipSize' | 'itemLeadingChip' | 'itemLabel' | 'itemDescription' | 'itemContent' | 'itemTrailing' | 'itemTrailingIcon'>
   [key: string]: any
 }
 export type SelectItem = SelectItemBase | AcceptableValue | boolean
@@ -83,6 +84,11 @@ export interface SelectProps<T extends ArrayOrNested<SelectItem> = ArrayOrNested
    * @defaultValue 'label'
    */
   labelKey?: keyof NestedItem<T>
+  /**
+   * When `items` is an array of objects, select the field to use as the description.
+   * @defaultValue 'description'
+   */
+  descriptionKey?: keyof NestedItem<T>
   items?: T
   /** The value of the Select when initially rendered. Use when you do not need to control the state of the Select. */
   defaultValue?: GetModelValue<T, VK, M>
@@ -129,6 +135,7 @@ export interface SelectSlots<
   'item': SlotProps<T>
   'item-leading': SlotProps<T>
   'item-label': SlotProps<T>
+  'item-description': SlotProps<T>
   'item-trailing': SlotProps<T>
   'content-top': (props?: {}) => any
   'content-bottom': (props?: {}) => any
@@ -156,6 +163,7 @@ defineOptions({ inheritAttrs: false })
 const props = withDefaults(defineProps<SelectProps<T, VK, M>>(), {
   valueKey: 'value' as never,
   labelKey: 'label' as never,
+  descriptionKey: 'description' as never,
   portal: true,
   autofocusDelay: 0
 })
@@ -324,11 +332,18 @@ defineExpose({
                     />
                   </slot>
 
-                  <SelectItemText :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
-                    <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
-                      {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
-                    </slot>
-                  </SelectItemText>
+                  <div :class="ui.itemContent({ class: [props.ui?.itemContent, isSelectItem(item) && item.ui?.itemContent] })">
+                    <SelectItemText :class="ui.itemLabel({ class: [props.ui?.itemLabel, isSelectItem(item) && item.ui?.itemLabel] })">
+                      <slot name="item-label" :item="(item as NestedItem<T>)" :index="index">
+                        {{ isSelectItem(item) ? get(item, props.labelKey as string) : item }}
+                      </slot>
+                    </SelectItemText>
+                    <div v-if="isSelectItem(item) && get(item, props.descriptionKey as string)" :class="ui.itemDescription({ class: [props.ui?.itemDescription, isSelectItem(item) && item.ui?.itemDescription] })">
+                      <slot name="item-description" :item="(item as NestedItem<T>)" :index="index">
+                        {{ get(item, props.descriptionKey as string) }}
+                      </slot>
+                    </div>
+                  </div>
 
                   <span :class="ui.itemTrailing({ class: [props.ui?.itemTrailing, isSelectItem(item) && item.ui?.itemTrailing] })">
                     <slot name="item-trailing" :item="(item as NestedItem<T>)" :index="index" />

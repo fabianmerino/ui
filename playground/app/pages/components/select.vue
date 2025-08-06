@@ -16,6 +16,7 @@ const selectedItems = ref([fruits[0]!, vegetables[0]!])
 const statuses = [{
   label: 'Backlog',
   value: 'backlog',
+  description: 'Issues that have been identified but not yet prioritized',
   icon: 'i-lucide-circle-help'
 }, {
   label: 'Todo',
