@@ -4,7 +4,7 @@ category: navigation
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Breadcrumb.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Breadcrumb.vue
 ---
 
 ## Usage
@@ -123,3 +123,7 @@ You can also use the `#item`, `#item-leading`, `#item-label` and `#item-trailing
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

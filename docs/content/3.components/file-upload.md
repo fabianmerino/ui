@@ -5,7 +5,7 @@ category: form
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/FileUpload.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/FileUpload.vue
 navigation.badge: New
 ---
 
@@ -344,3 +344,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

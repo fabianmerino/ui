@@ -5,7 +5,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/AvatarGroup.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/AvatarGroup.vue
 ---
 
 ## Usage
@@ -102,3 +102,7 @@ Wrap each avatar with a [Link](/components/link) to make them clickable.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

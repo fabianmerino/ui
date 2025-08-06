@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Badge.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Badge.vue
 ---
 
 ## Usage
@@ -145,3 +145,7 @@ slots:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

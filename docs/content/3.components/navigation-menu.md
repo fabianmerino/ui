@@ -8,7 +8,7 @@ links:
     to: https://reka-ui.com/docs/components/navigation-menu
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/NavigationMenu.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/NavigationMenu.vue
 ---
 
 ## Usage
@@ -1178,3 +1178,7 @@ In this example, we add the `sm:w-(--reka-navigation-menu-viewport-width)` class
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

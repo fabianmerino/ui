@@ -7,7 +7,7 @@ links:
     to: https://reka-ui.com/docs/components/tooltip
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Tooltip.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Tooltip.vue
 ---
 
 ## Usage
@@ -213,3 +213,7 @@ name: 'tooltip-cursor-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

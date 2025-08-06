@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Avatar.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Avatar.vue
 ---
 
 ## Usage
@@ -107,3 +107,7 @@ You can use a [Chip](/components/chip) component to display a chip around the Av
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

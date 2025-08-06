@@ -8,7 +8,7 @@ links:
     to: https://reka-ui.com/docs/components/combobox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/SelectMenu.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/SelectMenu.vue
 ---
 
 ## Usage
@@ -855,3 +855,7 @@ When accessing the component via a template ref, you can use the following:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

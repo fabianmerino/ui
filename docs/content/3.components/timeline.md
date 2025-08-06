@@ -5,7 +5,7 @@ category: data
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Timeline.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Timeline.vue
 ---
 
 ## Usage
@@ -266,3 +266,7 @@ Use the available slots to create a more complex Timeline.
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

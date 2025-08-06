@@ -7,7 +7,7 @@ links:
     to: https://reka-ui.com/docs/components/collapsible
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Collapsible.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Collapsible.vue
 ---
 
 ## Usage
@@ -146,3 +146,7 @@ name: 'collapsible-icon-example'
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

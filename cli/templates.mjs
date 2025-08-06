@@ -5,7 +5,7 @@ const playground = ({ name, pro }) => {
   const kebabName = kebabCase(name)
 
   return {
-    filename: `playground/app/pages/components/${kebabName}.vue`,
+    filename: `playgrounds/nuxt/app/pages/components/${kebabName}.vue`,
     contents: pro
       ? undefined
       : `
@@ -188,7 +188,7 @@ links:${primitive
     to: https://reka-ui.com/docs/components/${kebabName}`}
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v3/src/runtime/components/${upperName}.vue
+    to: https://github.com/nuxt/${pro ? 'ui-pro' : 'ui'}/tree/v4/src/runtime/components/${upperName}.vue
 navigation.badge: Soon
 ---
 
@@ -213,6 +213,10 @@ navigation.badge: Soon
 ## Theme
 
 :component-theme${pro ? '{pro}' : ''}
+
+## Changelog
+
+:component-changelog
 `
   }
 }

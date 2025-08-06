@@ -4,7 +4,7 @@ category: element
 links:
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Chip.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Chip.vue
 ---
 
 ## Usage
@@ -149,3 +149,7 @@ In this example, the Chip has a color per status and is displayed when the statu
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

@@ -7,7 +7,7 @@ links:
     to: https://reka-ui.com/docs/components/checkbox
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/Checkbox.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/Checkbox.vue
 ---
 
 ## Usage
@@ -238,3 +238,7 @@ props:
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog

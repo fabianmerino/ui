@@ -8,7 +8,7 @@ links:
     to: https://reka-ui.com/docs/components/context-menu
   - label: GitHub
     icon: i-simple-icons-github
-    to: https://github.com/nuxt/ui/tree/v3/src/runtime/components/ContextMenu.vue
+    to: https://github.com/nuxt/ui/tree/v4/src/runtime/components/ContextMenu.vue
 ---
 
 ## Usage
@@ -322,3 +322,7 @@ In this example, :kbd{value="meta"} :kbd{value="S"}, :kbd{value="shift"} :kbd{va
 ## Theme
 
 :component-theme
+
+## Changelog
+
+:component-changelog
