@@ -7,7 +7,7 @@
   },
   "baseBranchPatterns": [
     "v2",
-    "v3"
+    "v4"
   ],
   "ignoreDeps": [
     "@nuxt/module-builder",
@@ -16,10 +16,10 @@
   "packageRules": [
     {
       "matchBaseBranches": [
-        "v3"
+        "v4"
       ],
       "labels": [
-        "v3"
+        "v4"
       ]
     },
     {
