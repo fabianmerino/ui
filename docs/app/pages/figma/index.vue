@@ -17,8 +17,10 @@ useSeoMeta({
 const video = ref<HTMLVideoElement | null>(null)
 const played = ref(false)
 
+const { width: windowWidth } = useWindowSize()
+const isMobile = computed(() => windowWidth.value < 768)
+
 onMounted(async () => {
-  // Animate cursors
   await new Promise(resolve => setTimeout(resolve, 1000))
   const figmaWordPosition = document.querySelector('#figma')?.getBoundingClientRect()
   const nuxtWordPosition = document.querySelector('#nuxt')?.getBoundingClientRect()
@@ -26,39 +28,56 @@ onMounted(async () => {
   const initialScrollY = window.scrollY
 
   if (figmaWordPosition && nuxtWordPosition) {
-    const cursor1Sequence = async () => {
-      await animate('#cursor1', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1 }).finished
-      await animate('#cursor1', { opacity: 1 }, { duration: 0.3 }).finished
-      await animate('#cursor1', {
-        left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width / 2),
-        top: Math.round(figmaWordPosition.top + initialScrollY - figmaWordPosition.height / 4)
+    const createCursorSequence = async (
+      cursorId: string,
+      targetWord: DOMRect,
+      targetColor: string,
+      wordId: string,
+      delay: number = 0
+    ) => {
+      const maxWidth = isMobile.value ? windowWidth.value * 0.8 : window.outerWidth
+      const maxHeight = isMobile.value ? window.innerHeight * 0.6 : window.outerHeight
+
+      await animate(cursorId, {
+        left: Math.round(Math.random() * maxWidth),
+        top: Math.round(Math.random() * maxHeight)
+      }, { duration: 0.1, delay }).finished
+
+      await animate(cursorId, { opacity: 1 }, { duration: 0.3 }).finished
+
+      const clickPositionX = isMobile.value
+        ? Math.round(targetWord.left + initialScrollX + targetWord.width * 0.5)
+        : Math.round(targetWord.left + initialScrollX + targetWord.width / 2)
+      const clickPositionY = isMobile.value
+        ? Math.round(targetWord.top + initialScrollY - targetWord.height / 0.7)
+        : Math.round(targetWord.top + initialScrollY - targetWord.height / 1.2)
+
+      await animate(cursorId, {
+        left: clickPositionX,
+        top: clickPositionY
       }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' }).finished
-      await animate('#cursor1', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }).finished
-      await animate('#cursor1', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }).finished
-      await animate('#figma', { color: 'var(--ui-info)' }, { duration: 0.3, ease: 'easeOut' }).finished
-      await animate('#cursor1', {
-        left: Math.round(figmaWordPosition.left + initialScrollX + figmaWordPosition.width),
-        top: Math.round(figmaWordPosition.top + initialScrollY)
+
+      await animate(cursorId, { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate(cursorId, { scale: 1 }, { duration: 0.1, ease: 'easeOut' }).finished
+      await animate(wordId, { color: targetColor }, { duration: 0.3, ease: 'easeOut' }).finished
+
+      const finalPositionX = isMobile.value
+        ? Math.round(targetWord.left + initialScrollX + targetWord.width * 1)
+        : Math.round(targetWord.left + initialScrollX + targetWord.width)
+      const finalPositionY = isMobile.value
+        ? Math.round(targetWord.top + initialScrollY + targetWord.height * -1.2)
+        : Math.round(targetWord.top + initialScrollY - targetWord.height / 2)
+
+      await animate(cursorId, {
+        left: finalPositionX,
+        top: finalPositionY
       }, { duration: 0.6, ease: 'easeInOut' }).finished
     }
 
-    const cursor2Sequence = async () => {
-      await animate('#cursor2', { left: Math.round(Math.random() * window.outerWidth), top: Math.round(Math.random() * window.outerHeight) }, { duration: 0.1, delay: 0.6 }).finished
-      await animate('#cursor2', { opacity: 1 }, { duration: 0.3 }).finished
-      await animate('#cursor2', {
-        left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width / 2),
-        top: Math.round(nuxtWordPosition.top + initialScrollY - nuxtWordPosition.height / 4)
-      }, { duration: 1.5, delay: 0.2, ease: 'easeInOut' }).finished
-      await animate('#cursor2', { scale: 0.8 }, { duration: 0.1, ease: 'easeOut' }).finished
-      await animate('#cursor2', { scale: 1 }, { duration: 0.1, ease: 'easeOut' }).finished
-      await animate('#nuxt', { color: 'var(--ui-success)' }, { duration: 0.3, ease: 'easeOut' }).finished
-      await animate('#cursor2', {
-        left: Math.round(nuxtWordPosition.left + initialScrollX + nuxtWordPosition.width),
-        top: Math.round(nuxtWordPosition.top + initialScrollY)
-      }, { duration: 0.6, ease: 'easeInOut' }).finished
-    }
-
-    await Promise.all([cursor1Sequence(), cursor2Sequence()])
+    await Promise.all([
+      createCursorSequence('#cursor1', figmaWordPosition, 'var(--ui-info)', '#figma'),
+      createCursorSequence('#cursor2', nuxtWordPosition, 'var(--ui-success)', '#nuxt', 0.6)
+    ])
   }
 })
 </script>
