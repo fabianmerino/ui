@@ -32,7 +32,7 @@
     "prepack": "pnpm build",
     "dev": "nuxi dev docs",
     "play": "nuxi dev playground",
-    "build:docs": "nuxi generate docs",
+    "docs:build": "nuxi generate docs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "vue-tsc --noEmit && nuxi typecheck docs",
