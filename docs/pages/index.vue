@@ -171,7 +171,7 @@
     </ULandingSection>
 
     <template v-if="navigation.find(item => item._path === '/pro')">
-      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
+      <ULandingHero id="pro" :links="page.pro.links" :ui="{ title: 'sm:text-6xl' }" class="-z-10 bg-gradient-to-b from-gray-50 dark:from-gray-950/50 to-white dark:to-gray-900 relative">
         <template #top>
           <Gradient class="absolute inset-x-0 top-0 w-full block" />
         </template>
