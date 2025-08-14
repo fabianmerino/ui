@@ -47,6 +47,10 @@ const categories = {
   }, {
     id: 'i18n',
     title: 'i18n'
+  }],
+  'typography': [{
+    id: 'vue-components',
+    title: 'Vue Components'
   }]
 }
 

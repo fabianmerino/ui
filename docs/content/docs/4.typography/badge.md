@@ -1,0 +1,28 @@
+---
+title: Badge
+description: 'Learn how to use the ProseBadge component in your Nuxt app.'
+framework: nuxt
+category: vue-components
+---
+
+Use markdown in the default slot of the `badge` component to display a [Badge](/docs/components/badge) in your content.
+
+::code-preview{label="Preview"}
+
+:::badge
+**v3.0.0**
+:::
+
+#code
+
+```mdc
+::badge
+**v3.0.0**
+::
+```
+
+::
+
+## Theme
+
+:component-theme{slug="badge" prose}
