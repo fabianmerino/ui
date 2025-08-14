@@ -1,0 +1,112 @@
+---
+title: CardGroup
+description: 'Learn how to use the ProseCardGroup component in your Nuxt app.'
+framework: nuxt
+category: vue-components
+---
+
+Wrap your `card` components with the `card-group` component to group them together in a grid layout.
+
+::code-preview
+
+:::card-group{class="w-full my-0"}
+
+::card
+---
+title: Dashboard
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/dashboard
+target: _blank
+---
+A dashboard with multi-column layout.
+::
+
+::card
+---
+title: SaaS
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/saas
+target: _blank
+---
+A template with landing, pricing, docs and blog.
+::
+
+::card
+---
+title: Docs
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/docs
+target: _blank
+---
+A documentation with `@nuxt/content`.
+::
+
+::card
+---
+title: Landing
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/landing
+target: _blank
+---
+A landing page you can use as starting point.
+::
+
+:::
+
+#code
+
+```mdc
+::card-group
+
+::card
+---
+title: Dashboard
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/dashboard
+target: _blank
+---
+A dashboard with multi-column layout.
+::
+
+::card
+---
+title: SaaS
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/saas
+target: _blank
+---
+A template with landing, pricing, docs and blog.
+::
+
+::card
+---
+title: Docs
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/docs
+target: _blank
+---
+A documentation with `@nuxt/content`.
+::
+
+::card
+---
+title: Landing
+icon: i-simple-icons-github
+to: https://github.com/nuxt-ui-pro/landing
+target: _blank
+---
+A landing page you can use as starting point.
+::
+
+::
+```
+
+::
+
+## Theme
+
+:component-theme{slug="card-group" prose}
+
+## Changelog
+
+:component-changelog
