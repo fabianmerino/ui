@@ -157,6 +157,8 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 #code
 
+::code-collapse{class="[&>div>pre]:rounded-t-none [&>div]:my-0"}
+
 `````mdc
 ::code-tree{defaultValue="app/app.config.ts"}
 
@@ -304,6 +306,8 @@ Check out the [deployment documentation](https://nuxt.com/docs/getting-started/d
 
 ::
 `````
+
+::
 
 ::
 
