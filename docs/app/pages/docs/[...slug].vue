@@ -61,20 +61,18 @@ useSeoMeta({
   ogDescription: description
 })
 
-if (route.path.startsWith('/docs/components')) {
+if (route.path.startsWith('/docs/components/')) {
   defineOgImageComponent('OgImageComponent', {
     title: page.value.title,
     description: page.value.description,
-    component: (route.params.slug as string[]).pop() as string,
-    module: page.value.module
+    component: (route.params.slug as string[]).pop() as string
   })
 } else {
   defineOgImageComponent('Docs', {
     title: page.value.title,
     description: page.value.description,
     headline: breadcrumb.value?.[breadcrumb.value.length - 1]?.label || 'Nuxt UI',
-    framework: page.value?.framework,
-    module: page.value.module
+    framework: page.value?.framework
   })
 }
 
