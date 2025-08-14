@@ -7,7 +7,7 @@ category: vue-components
 
 Use markdown in the default slot of the `badge` component to display a [Badge](/docs/components/badge) in your content.
 
-::code-preview{label="Preview"}
+::code-preview
 
 :::badge
 **v3.0.0**

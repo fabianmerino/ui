@@ -30,7 +30,7 @@ Learn how to install `@nuxt/ui` in your project.
 
 You can also use the `note`, `tip`, `warning` and `caution` shortcuts with pre-defined icons and colors.
 
-::code-preview{label="Preview"}
+::code-preview
 
 :::div{class="flex flex-col gap-4 w-full"}
 
