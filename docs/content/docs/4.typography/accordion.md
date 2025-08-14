@@ -19,8 +19,8 @@ The transition to v3 involves significant changes, including new component struc
 Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="What about Nuxt UI Pro?" icon="i-lucide-circle-help"}
-We've also rebuilt Nuxt UI Pro from scratch and released a `v3.0.0-alpha.x` package but it only contains the components to build this documentation yet. This will be a free update, so the license you buy now will be valid for v3. We're actively working to finish the rewrite of all Nuxt UI Pro components.
+::accordion-item{label="Can I customize the default styling?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI provides a comprehensive theming system that allows you to customize colors, spacing, typography, and component variants. You can override defaults through your app configuration or create entirely custom themes while maintaining accessibility and consistency.
 ::
 
 :::
@@ -38,8 +38,8 @@ The transition to v3 involves significant changes, including new component struc
 Nuxt UI is now compatible with Vue! You can follow the [installation guide](/docs/getting-started/installation/vue) to get started.
 ::
 
-::accordion-item{label="What about Nuxt UI Pro?" icon="i-lucide-circle-help"}
-We've also rebuilt Nuxt UI Pro from scratch and released a `v3.0.0-alpha.x` package but it only contains the components to build this documentation yet. This will be a free update, so the license you buy now will be valid for v3. We're actively working to finish the rewrite of all Nuxt UI Pro components.
+::accordion-item{label="Can I customize the default styling?" icon="i-lucide-circle-help"}
+Yes! Nuxt UI provides a comprehensive theming system that allows you to customize colors, spacing, typography, and component variants. You can override defaults through your app configuration or create entirely custom themes while maintaining accessibility and consistency.
 ::
 
 ::

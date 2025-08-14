@@ -35,12 +35,6 @@ Wrap a code-block with the `code-preview` component to display a preview of an M
 
 ::
 
-## API
-
-### Props
-
-:component-props{name="code-preview" prose}
-
 ## Theme
 
 :component-theme{slug="code-preview" prose}
