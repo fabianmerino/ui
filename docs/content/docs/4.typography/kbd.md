@@ -30,4 +30,4 @@ Use the `kbd` component to display a [Kbd](/docs/components/kbd) in your content
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

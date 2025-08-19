@@ -41,4 +41,4 @@ Best suited for small teams, startups and agencies with up to 5 developers.
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

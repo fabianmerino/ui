@@ -76,4 +76,4 @@ extra:
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

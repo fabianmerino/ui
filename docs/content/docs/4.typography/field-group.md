@@ -59,4 +59,4 @@ Group fields together in a list.
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

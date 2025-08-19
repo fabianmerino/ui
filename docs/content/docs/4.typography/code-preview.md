@@ -41,4 +41,4 @@ Wrap a code-block with the `code-preview` component to display a preview of an M
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

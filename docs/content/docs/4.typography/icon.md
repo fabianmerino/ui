@@ -30,4 +30,4 @@ Use the `icon` component to display an [Icon](/docs/components/icon) in your con
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

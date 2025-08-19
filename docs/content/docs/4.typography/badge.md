@@ -26,3 +26,7 @@ Use markdown in the default slot of the `badge` component to display a [Badge](/
 ## Theme
 
 :component-theme{slug="badge" prose}
+
+## Changelog
+
+:component-changelog{prose}

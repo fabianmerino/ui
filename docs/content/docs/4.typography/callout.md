@@ -86,4 +86,4 @@ This action cannot be undone.
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}

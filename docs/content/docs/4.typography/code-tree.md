@@ -327,4 +327,4 @@ Like the `ProsePre` component, the `CodeTree` handles filenames, icons and copy 
 
 ## Changelog
 
-:component-changelog
+:component-changelog{prose}
