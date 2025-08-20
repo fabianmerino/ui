@@ -20,6 +20,14 @@ jobs:
           days-before-stale: 60
           days-before-close: 7
           stale-issue-label: 'stale'
+          stale-issue-message: |
+            Hi! 👋
+
+            This issue has been marked as **stale** due to inactivity. If no further activity occurs, it will be closed automatically after a period of time. Please add a comment or update if you wish to keep it open.
+
+            Thank you for your understanding and support!
+
+            — Nuxt UI Team
           close-issue-label: 'closed-by-bot'
           close-issue-message: |
             Hi! 👋
