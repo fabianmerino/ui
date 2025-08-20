@@ -4,6 +4,7 @@ import { kebabCase } from 'scule'
 
 interface CommitInfo {
   components?: string[]
+  proseComponents?: string[]
   version?: string
   hash: string
   date: string
@@ -39,15 +40,23 @@ export default defineNuxtModule({
       delete log.body
       const files = raw.replace(/\\/g, '/').trim().split('\n')
 
-      log.components = [...new Set(files.map(i => kebabCase(i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1] ?? '')).filter(Boolean) as string[])]
+      const regularComponents = files.map(i => kebabCase(i.match(/^src\/runtime\/components\/(\w+)\.vue$/)?.[1] ?? '')).filter(Boolean)
+      const proseComponents = files.map((i) => {
+        const match = i.match(/^src\/runtime\/components\/prose\/(\w+)\.vue$/)
+        return match?.[1] ? kebabCase(match[1]) : ''
+      }).filter(Boolean)
+
+      log.components = regularComponents
+      log.proseComponents = proseComponents
     }
 
-    const result = logs.filter(i => i.components?.length || i.version)
+    const result = logs.filter(i => i.components?.length || i.proseComponents?.length || i.version)
 
     addTemplate({
       filename: 'changelog.ts',
       getContents: () => `export interface CommitInfo {
   components?: string[]
+  proseComponents?: string[]
   version?: string
   hash: string
   date: string
