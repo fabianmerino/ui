@@ -5,7 +5,7 @@ import Table from '../../src/runtime/components/Table.vue'
 import type { TableColumn } from '../../src/runtime/components/Table.vue'
 
 describe('Table grouped columns colspan fix', () => {
-  const data = [{
+  const _data = [{
     id: 'm5gr84i9',
     firstName: 'John',
     lastName: 'Doe',
@@ -13,7 +13,7 @@ describe('Table grouped columns colspan fix', () => {
   }]
 
   // Example of grouped columns where the group has 2 child columns
-  const groupedColumns: TableColumn<typeof data[number]>[] = [
+  const groupedColumns: TableColumn<typeof _data[number]>[] = [
     {
       id: 'id',
       accessorKey: 'id',
@@ -40,26 +40,6 @@ describe('Table grouped columns colspan fix', () => {
     }
   ]
 
-  // Regular columns for comparison
-  const regularColumns: TableColumn<typeof data[number]>[] = [
-    {
-      accessorKey: 'id',
-      header: 'ID'
-    },
-    {
-      accessorKey: 'firstName',
-      header: 'First Name'
-    },
-    {
-      accessorKey: 'lastName',
-      header: 'Last Name'
-    },
-    {
-      accessorKey: 'email',
-      header: 'Email'
-    }
-  ]
-
   it('should use tableApi.getAllFlatColumns().length for loading state', async () => {
     const wrapper = await mountSuspended(Table, {
       props: {
@@ -71,12 +51,12 @@ describe('Table grouped columns colspan fix', () => {
 
     const loadingTd = wrapper.find('tbody tr td')
     expect(loadingTd.exists()).toBe(true)
-    
+
     // With the fix, it should use the actual number of flat columns
     // which is the correct number for the rendered table
     const colspan = loadingTd.attributes('colspan')
     expect(colspan).toBeDefined()
-    expect(parseInt(colspan!)).toBeGreaterThan(0)
+    expect(Number.parseInt(colspan!)).toBeGreaterThan(0)
   })
 
   it('should use tableApi.getAllFlatColumns().length for empty state', async () => {
@@ -89,10 +69,10 @@ describe('Table grouped columns colspan fix', () => {
 
     const emptyTd = wrapper.find('tbody tr td')
     expect(emptyTd.exists()).toBe(true)
-    
+
     // With the fix, it should use the actual number of flat columns
     const colspan = emptyTd.attributes('colspan')
     expect(colspan).toBeDefined()
-    expect(parseInt(colspan!)).toBeGreaterThan(0)
+    expect(Number.parseInt(colspan!)).toBeGreaterThan(0)
   })
 })
